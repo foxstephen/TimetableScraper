@@ -7,14 +7,20 @@ require_relative 'PageLoader'
 username = "students"
 password = "timetables"
 
+
+# Specify the URL and load the page.
 pageLoader = PageLoader.new "https://www.dit.ie/timetables/PortalServ?reqtype=timetable&ttType=CLASS&sKey=201516|DT228|DT228/2&weeks=4-16"
-
 webPage = pageLoader.loadPage
-puts webPage.inspect
 
 
+# Login with username and password
 loginForm = webPage.forms.first
 loginForm['username'] = username
 loginForm['userpassword'] = password
-
 loggedInPage = loginForm.submit
+
+# Reload the URL pass in via the
+# constructor and 
+webPage = pageLoader.loadPage
+
+puts webPage.title

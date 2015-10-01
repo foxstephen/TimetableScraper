@@ -16,4 +16,9 @@ class PageLoader
     return @mechanizeInstance.get(@url)
   end
 
+  # Loads a web page with a given url.
+  def pageForURL(url)
+    return @mechanizeInstance.get(url)
+    end
+
 end
