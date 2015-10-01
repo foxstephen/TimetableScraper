@@ -1,4 +1,5 @@
 require_relative 'PageLoader'
+require_relative 'TimetableParser'
 
 # https://www.dit.ie/timetables/PortalServ?reqtype=timetable&ttType=CLASS&sKey=201516|DT228|DT228/2|4-16
 # Format:  Academic year(201516), Course(DT228), Course/Year(DT228/2), Weeks(4-16)
@@ -9,7 +10,7 @@ password = "timetables"
 
 
 # Specify the URL and load the page.
-pageLoader = PageLoader.new "https://www.dit.ie/timetables/PortalServ?reqtype=timetable&ttType=CLASS&sKey=201516|DT228|DT228/2&weeks=4-16"
+pageLoader = PageLoader.new "https://www.dit.ie/timetables/PortalServ?reqtype=timetable&ttType=CLASS&sKey=201516|DT228|DT228/3&weeks=4-16"
 webPage = pageLoader.loadPage
 
 
@@ -19,8 +20,12 @@ loginForm['username'] = username
 loginForm['userpassword'] = password
 loggedInPage = loginForm.submit
 
-# Reload the URL pass in via the
-# constructor and 
+# Reload the URL passed in via the
+# constructor as we're now logged in.
 webPage = pageLoader.loadPage
 
-puts webPage.title
+
+if webPage.title == "Timetable for"
+  timetableParser = TimetableParser.new
+  timetableParser.parsePageToOutput(webPage)
+end
