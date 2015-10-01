@@ -2,11 +2,12 @@ require_relative 'SharedMechanize'
 
 class PageLoader
 
-  @mechanizeInstance = SharedMechanize.instance
-
   # Initializes a new instance with a specified instance
   def initialize(url)
     @url = url
+
+    # Create our mechanized instance
+    @mechanizeInstance = SharedMechanize.instance
   end
 
 
@@ -14,5 +15,5 @@ class PageLoader
   def loadPage
     return @mechanizeInstance.get(@url)
   end
-  
+
 end

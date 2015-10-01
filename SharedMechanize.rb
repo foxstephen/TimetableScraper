@@ -1,7 +1,7 @@
 require 'mechanize'
 
-# This class shares a single `mechanize` instance
-# througout a session.
+# Use this class to use a shared 'mechanize'
+# instance across different classes.
 class SharedMechanize
 
   @@mechanizeInstance = Mechanize.new
