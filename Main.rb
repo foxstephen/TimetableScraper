@@ -13,6 +13,7 @@ password = "timetables"
 pageLoader = PageLoader.new "https://www.dit.ie/timetables/PortalServ?reqtype=timetable&ttType=CLASS&sKey=201516|DT228|DT228/3&weeks=4-16"
 webPage = pageLoader.loadPage
 
+puts "Login uri: " + webPage.uri.inspect
 
 # Login with username and password
 loginForm = webPage.forms.first
@@ -20,12 +21,16 @@ loginForm['username'] = username
 loginForm['userpassword'] = password
 loggedInPage = loginForm.submit
 
+puts "Logged in uri: " + loggedInPage.uri.inspect
+
 # Reload the URL passed in via the
-# constructor as we're now logged in.
+# constructor to pageLoader as we're now logged in.
 webPage = pageLoader.loadPage
 
 
-if webPage.title == "Timetable for"
+# Check to see if we successfully logged in and
+# the current webpage content is displaying a timetable.
+if webPage.title == 'Timetable for '
   timetableParser = TimetableParser.new
-  timetableParser.parsePageToOutput(webPage)
+  puts timetableParser.parsePageToOutput(webPage).inspect
 end
