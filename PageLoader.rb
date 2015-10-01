@@ -1,23 +1,23 @@
-require 'mechanize'
+require_relative 'SharedMechanize'
 
 class PageLoader
 
-  mechanize = Mechanize.new
+  mechanizeInstance = SharedMechanize.instance
 
   # Initializes a new instance with a specified instance
-  def initialize(url):
+  def initialize(url)
     @url = url
   end
 
 
   # Loads the page with associated with the instance.
-  def loadPage:
+  def loadPage
     return mechanize.get(@url)
   end
 
 
   # Class method for loading a page
-  def self.loadPage(url):
+  def self.loadPage(url)
     mechanize = Mechanize.new
     return mechanize.get(url)
   end

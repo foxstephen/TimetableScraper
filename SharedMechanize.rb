@@ -2,8 +2,12 @@ require 'mechanize'
 
 # This class shares a single `mechanize` instance
 # througout a session.
-class SharedMechanize:
-  include Singleton
+class SharedMechanize
 
-  def sharedInstance
+  @@mechanizeInstance = Mechanize.new
+
+  def self.instance
+    return @@mechanizeInstance
+  end
+
 end
