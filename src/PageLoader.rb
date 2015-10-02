@@ -38,7 +38,7 @@ class PageLoader
 
   # Loads a web page with a given url.
   def pageForURL(url)
-    return @mechanizeInstance.get(url)
+return @mechanizeInstance.get(url)
   end
 
 
@@ -47,7 +47,7 @@ class PageLoader
   # Param: The webpage to check.
   # Returns: A value CURRENT_PAGE which represents which
   #         page is currently held.
-  def self.currentPage(webPage)
+  def currentPage(webPage)
     if (webPage.uri == 'https://www.dit.ie/timetables/index.jsp')
       return WEB_PAGE_LOGIN
     elsif (webPage.uri == 'https://www.dit.ie/timetables/PortalServ?reqtype=login')
