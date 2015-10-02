@@ -6,9 +6,6 @@ class LoginManager
     username = "students"
     password = "timetables"
 
-    # TODO: Add contructor to take course parameters.
-    def initialize
-    end
 
     # Will attempt to in to the DIT Timetable service.
     # Param: The url for the webpage.
@@ -16,6 +13,7 @@ class LoginManager
         pageLoader = PageLoader.new url
         webPage = pageLoader.loadPage
 
+        
         # Check to see if redirected to login page.
         if (PageLoader.currentPage(webPage) == PageLoader::WEB_PAGE_LOGIN)
 

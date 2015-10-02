@@ -22,6 +22,9 @@ class PageLoader
                     WEB_PAGE_UNKNOWN = '4'
                 ]
 
+
+
+
     # Initializes a new instance with a specified instance
     def initialize(url)
         @url = url
@@ -46,7 +49,7 @@ class PageLoader
     # Param: The webpage to check.
     # Returns: A value CURRENT_PAGE which represents which
     #         page is currently held.
-    def currentPage(webPage)
+    def self.currentPage(webPage)
         if (webPage.uri == 'https://www.dit.ie/timetables/index.jsp')
             return WEB_PAGE_LOGIN
         elsif (webPage.uri == 'https://www.dit.ie/timetables/PortalServ?reqtype=login')

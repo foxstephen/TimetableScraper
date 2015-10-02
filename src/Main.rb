@@ -1,4 +1,5 @@
 require_relative 'loginmanager'
+require_relative 'pageloader'
 require_relative 'timetableparser'
 
 
@@ -13,8 +14,6 @@ require_relative 'timetableparser'
 loginManager = LoginManager.new
 
 webPage = loginManager.login('https://www.dit.ie/timetables/PortalServ?reqtype=timetable&ttType=CLASS&sKey=201516|DT228|DT228/3&weeks=4-16')
-
-
 
 
 # Check to see if we successfully logged in and
