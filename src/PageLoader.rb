@@ -1,5 +1,11 @@
 require_relative 'sharedmechanize'
 
+# See below for the following format for URLs.
+# https://www.dit.ie/timetables/PortalServ?reqtype=timetable&ttType=CLASS&sKey=201516|DT228|DT228/2|4-16
+# Format:  Academic year(201516), Course(DT228), Course/Year(DT228/2), Weeks(4-16)
+#	?reqtype=timetable&ttType=CLASS&sKey=DATE|COURSE|COURSE/YEAR|SEMESTERS
+
+
 class PageLoader
 
     # Values which represent the web page of
@@ -44,17 +50,18 @@ class PageLoader
     end
 
 
-    # Returns the current web page.
+    # Returns the type of web page.
     #
     # Param: The webpage to check.
     # Returns: A value CURRENT_PAGE which represents which
     #         page is currently held.
     def self.currentPage(webPage)
-        if (webPage.uri == 'https://www.dit.ie/timetables/index.jsp')
+        if (webPage.uri.to_s == 'https://www.dit.ie/timetables/index.jsp')
+            puts "ye"
             return WEB_PAGE_LOGIN
-        elsif (webPage.uri == 'https://www.dit.ie/timetables/PortalServ?reqtype=login')
+        elsif (webPage.uri.to_s == 'https://www.dit.ie/timetables/PortalServ?reqtype=login')
             return WEB_PAGE_LOGGED_IN
-        elsif (webPage.title == 'Timetable for ')
+        elsif (webPage.title.to_s == 'Timetable for ')
             return WEB_PAGE_TIMETABLE
         else
             return WEB_PAGE_UNKNOWN

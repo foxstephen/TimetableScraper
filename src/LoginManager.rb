@@ -7,23 +7,22 @@ class LoginManager
     password = "timetables"
 
 
-    # Will attempt to in to the DIT Timetable service.
-    # Param: The url for the webpage.
-    def login(url)
-        pageLoader = PageLoader.new url
+    # Starts a new session on the DIT Timetable website.
+    def beginNewSession
+
+        pageLoader = PageLoader.new 'https://www.dit.ie/timetables/index.jsp'
         webPage = pageLoader.loadPage
 
-        
         # Check to see if redirected to login page.
         if (PageLoader.currentPage(webPage) == PageLoader::WEB_PAGE_LOGIN)
 
             # Login with username and password
             loginForm = webPage.forms.first
-            loginForm['username'] = username
-            loginForm['userpassword'] = password
+            loginForm['username'] = @username
+            loginForm['userpassword'] = @password
             loggedInPage = loginForm.submit
 
-            # TODO: Make these checks better (stephenfox)
+            # TODO(stephenfox): Make these checks better
             # Check to see if successfully logged in.
             if (PageLoader.currentPage(loggedInPage) == PageLoader::WEB_PAGE_LOGGED_IN)
                 puts "Logged in"
