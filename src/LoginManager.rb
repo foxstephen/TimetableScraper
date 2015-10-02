@@ -3,14 +3,21 @@ require_relative 'pageloader'
 # Use this class to login to the DIT Timetables service.
 class LoginManager
 
-    username = "students"
-    password = "timetables"
+    def initialize
+        @sessionURL = 'https://www.dit.ie/timetables/index.jsp'
+        @username = 'students'
+        @password = 'timetables'
+    end
 
 
-    # Starts a new session on the DIT Timetable website.
+    # Will attempt to login and begin a new session
+    # on the DIT Timetables website.
+    # Returns: If successfully logged in returns the webPage.
     def beginNewSession
 
-        pageLoader = PageLoader.new 'https://www.dit.ie/timetables/index.jsp'
+        puts @sessionURL
+
+        pageLoader = PageLoader.new @sessionURL
         webPage = pageLoader.loadPage
 
         # Check to see if redirected to login page.
@@ -22,19 +29,13 @@ class LoginManager
             loginForm['userpassword'] = @password
             loggedInPage = loginForm.submit
 
-            # TODO(stephenfox): Make these checks better
-            # Check to see if successfully logged in.
             if (PageLoader.currentPage(loggedInPage) == PageLoader::WEB_PAGE_LOGGED_IN)
-                puts "Logged in"
-                # Reload the URL passed in via the
-                # constructor to pageLoader as we're now logged in.
-                # We will be brought to whatever URL was specified in the constructor
-                # of our PageLoader instance.
-                webPage = pageLoader.loadPage
+                puts "Successfully logged into Timtable service at: " + loggedInPage.uri.to_s
+
+                return loggedInPage
+            else
+                puts "An error has occurred trying to log in at: " + loggedInPage.uri.to_s
             end
         end
-
-        return webPage
     end
-
 end
