@@ -4,10 +4,9 @@ require 'mechanize'
 # instance across different classes.
 class SharedMechanize
 
-  @@mechanizeInstance = Mechanize.new
+    @@mechanizeInstance = Mechanize.new
 
-  def self.instance
-    return @@mechanizeInstance
-  end
-
+    def self.instance
+        return @@mechanizeInstance
+    end
 end
