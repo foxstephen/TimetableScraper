@@ -19,6 +19,6 @@ webPage = loginManager.login("https://www.dit.ie/timetables/PortalServ?reqtype=t
 
 # Check to see if we successfully logged in and
 # the current webpage content is displaying a timetable.
-if (pageLoader.currentPage(webPage) == PageLoader::WEB_PAGE_TIMETABLE)
-
+if (PageLoader.currentPage(webPage) == PageLoader::WEB_PAGE_TIMETABLE)
+  puts "go get it"
 end

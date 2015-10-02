@@ -28,7 +28,7 @@ class LoginManager
       # TODO: Make these checks better (stephenfox)
       # Check to see if successfully logged in.
       if (PageLoader.currentPage(loggedInPage) == PageLoader::WEB_PAGE_LOGGED_IN)
-
+        puts "Logged in"
         # Reload the URL passed in via the
         # constructor to pageLoader as we're now logged in.
         # We will be brought to whatever URL was specified in the constructor
