@@ -1,4 +1,4 @@
-require_relative 'SharedMechanize'
+require_relative 'sharedmechanize'
 
 class PageLoader
 
@@ -16,9 +16,10 @@ class PageLoader
   #                      the following link: https://www.dit.ie/timetables/PortalServ?reqtype=timetable&ttType=CLASS&sKey=201516|DT228|DT228/2|4-16 parameters are set and correct. See Main.rb for parameters.
   #
   #
-  CURRENT_PAGE = [LOGIN_WEB_PAGE = 0,
-                  LOGGED_IN_WEB_PAGE = 1,
-                  TIMETABLE_WEB_PAGE = 2
+  CURRENT_PAGE = [WEB_PAGE_LOGIN = '1',
+                  WEB_PAGE_LOGGED_IN = '2',
+                  WEB_PAGE_TIMETABLE = '3',
+                  WEB_PAGE_UNKNOWN = '4'
                 ]
 
   # Initializes a new instance with a specified instance
@@ -47,12 +48,14 @@ class PageLoader
   # Retuns: A value CURRENT_PAGE which represents which
   #         page is currently held.
   def currentPage(webPage)
-    if (webPage.url == "CMIS ePortal")
-      return LOGIN_WEB_PAGE
-    elsif (webPage.title == "Timetable for ")
-      return TIMETABLE_WEB_PAGE
-      el
-
+    if (webPage.uri == 'https://www.dit.ie/timetables/index.jsp')
+      return WEB_PAGE_LOGIN
+    elsif (webPage.uri == 'https://www.dit.ie/timetables/PortalServ?reqtype=login')
+      return WEB_PAGE_LOGGED_IN
+    elsif (webPage.title == 'Timetable for ')
+      return WEB_PAGE_TIMETABLE
+    else
+      return WEB_PAGE_UNKNOWN
     end
   end
 
