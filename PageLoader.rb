@@ -44,10 +44,10 @@ class PageLoader
 
   # Returns the current web page.
   #
-  # Params: The webpage to check.
-  # Retuns: A value CURRENT_PAGE which represents which
+  # Param: The webpage to check.
+  # Returns: A value CURRENT_PAGE which represents which
   #         page is currently held.
-  def currentPage(webPage)
+  def self.currentPage(webPage)
     if (webPage.uri == 'https://www.dit.ie/timetables/index.jsp')
       return WEB_PAGE_LOGIN
     elsif (webPage.uri == 'https://www.dit.ie/timetables/PortalServ?reqtype=login')

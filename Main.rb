@@ -1,42 +1,18 @@
-require_relative 'pageloader'
+require_relative 'loginmanager'
 require_relative 'timetableparser'
 
+
+# See below for the following format for URLs.
 # https://www.dit.ie/timetables/PortalServ?reqtype=timetable&ttType=CLASS&sKey=201516|DT228|DT228/2|4-16
 # Format:  Academic year(201516), Course(DT228), Course/Year(DT228/2), Weeks(4-16)
 #	?reqtype=timetable&ttType=CLASS&sKey=DATE|COURSE|COURSE/YEAR|SEMESTERS
 
-username = "students"
-password = "timetables"
 
 
-# Specify the URL and load the page.
-pageLoader = PageLoader.new "https://www.dit.ie/timetables/PortalServ?reqtype=timetable&ttType=CLASS&sKey=201516|DT228|DT228/3&weeks=4-16"
-webPage = pageLoader.loadPage
+# Specify the URL and login
+loginManager = LoginManager.new
 
-
-# Check to see if redirected to login page.
-if (pageLoader.currentPage(webPage) == PageLoader::WEB_PAGE_LOGIN)
-  # Login with username and password
-  loginForm = webPage.forms.first
-  loginForm['username'] = username
-  loginForm['userpassword'] = password
-  loggedInPage = loginForm.submit
-
-  # Check to see if successfully logged in.
-  if (pageLoader.currentPage(loggedInPage) == PageLoader::WEB_PAGE_LOGGED_IN)
-
-    # Reload the URL passed in via the
-    # constructor to pageLoader as we're now logged in.
-    # We will be brought to whatever URL was specified in the constructor
-    # of our PageLoader instance.
-    webPage = pageLoader.loadPage
-
-  elsif (pageLoader.currentPage(loggedInPage) == PageLoader::WEB_PAGE_UNKNOWN)
-    abort("There was an error logging in.")
-  end
-end
-
-
+webPage = loginManager.login("https://www.dit.ie/timetables/PortalServ?reqtype=timetable&ttType=CLASS&sKey=201516|DT228|DT228/3&weeks=4-16")
 
 
 
