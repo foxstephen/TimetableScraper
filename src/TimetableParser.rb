@@ -4,21 +4,31 @@
 class TimetableParser
 
 
-
-
     # Initializes a new instance with
     # that has the content of a timetable
     def initialize
-        @rowForDay = {'r0' => 'Monday', 'r1' => 'Tuesday', 'r2' => 'Wednesday', 'r3' => 'Thursday', 'r4' => 'Friday', 'r5' => 'Saturday', 'r6' => 'Sunday'}
+        @days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
         @rows = ['r0', 'r1', 'r2', 'r3', 'r4', 'r5', 'r6']
+        @rowsPositions = {'r0' => 1, 'r1' => 481, 'r2' => 961, 'r3' => 1201, 'r4' => 1441} # The position of each row on the webpage
+        @timetable = {} # A hash map with a key(day) and a value(string) representing each day of a timetable
     end
 
 
     def parsePage(webPage)
-        self.countDaysForTimetable(webPage)
-        #puts webPage.search("div[style*='top:1px;']").text.tr('-', '').squeeze("\n")
+
+        # Get the number of days the timetable spans over.
+        numberOfDaysForTimetable = self.countDaysForTimetable(webPage)
+
+        for i in 0..numberOfDaysForTimetable
+            rowPosition = @rowsPositions[@rows[i]].to_s
+
+            @timetable[@days[i]] = webPage.search("div[style*='top:" + rowPosition + "px;']").text.tr('-', '').squeeze("\n")
+            puts @timetable[@days[i]]
+        end
+
 
     end
+
 
     # Counts the number of days a timetable will be
     # spread out over.
@@ -32,12 +42,13 @@ class TimetableParser
                 supportedDays << webPage.search('#' + row)
             end
         end
+
+        return supportedDays.count
     end
 
 
 
     def getTimetableForCourse(courseCode, year)
-
         generatedURL = self.generateURLForCourse(courseCode, year)
 
         pageLoader = PageLoader.new generatedURL
