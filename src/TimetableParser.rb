@@ -29,15 +29,18 @@ class TimetableParser
     end
 
 
-    # See below for the following format for URLs.
-    # https://www.dit.ie/timetables/PortalServ?reqtype=timetable&ttType=CLASS&sKey=201516|DT228|DT228/2|4-16
-    # https://www.dit.ie/timetabes/PortalServ?reqtype=timetable&ttType=CLASS&sKey=201516|DT228|DT228/3|4-16
-    # Format:  Academic year(201516), Course(DT228), Course/Year(DT228/2), Weeks(4-16)
-    #	?reqtype=timetable&ttType=CLASS&sKey=DATE|COURSE|COURSE/YEAR|SEMESTERS
-
 
     # Generates a URL for a given course and the year
     # of that course i.e 1st, 2nd year etc.
+    #
+    # Information on generating URLs.
+    #
+    # A URL for a course's timetable must be in the following format:
+    #   Format:  Academic year(201516), Course(DT228), Course/Year(DT228/2), Weeks(4-16)
+    #
+    # When represented as a actual URL it should look something like this.
+    # https://www.dit.ie/timetables/PortalServ?reqtype=timetable&ttType=CLASS&sKey=201516|DT228|DT228/2|4-16
+    #
     def generateURLForCourse(courseCode, year)
         date = '201516'
         weeks = '4-16'
