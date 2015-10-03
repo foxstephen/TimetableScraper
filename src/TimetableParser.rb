@@ -5,18 +5,20 @@ require_relative 'sharedmechanize'
 # into to be decided format.
 class TimetableParser
 
+
+
+
     # Initializes a new instance with
     # that has the content of a timetable
     def initialize
+
         @mechanizeInstance = SharedMechanize.instance
     end
 
 
     def parsePage(webPage)
-        # For days use : webPage.search("//div[@class='high']").text
-
-        puts webPage.search("//div[@id='c11285']").text.tr('-', '').squeeze("\n")
-        puts webPage.search("//div[@id='c80353']").text.tr('-', '').squeeze("\n")
+        puts webPage.search("div[style*='top:1px;']").text
+        #puts webPage.search("div[@id='c11285'][@style='position:absolute;top:1px;left:333px;width:65px;height:226px;overflow:hidden;background-color:transparent;z-index:10;border: 1px solid #000']").text
 
     end
 

@@ -9,4 +9,4 @@ webPage = loginManager.beginNewSession
 timetable = Timetable.new 'DT228', '3'
 someString = timetable.getTimetable
 
-puts someString.inspect
+someString.inspect
