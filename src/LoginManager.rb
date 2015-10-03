@@ -30,11 +30,11 @@ class LoginManager
             loggedInPage = loginForm.submit
 
             if (PageLoader.currentPage(loggedInPage) == PageLoader::WEB_PAGE_LOGGED_IN)
-                puts "Successfully logged into Timtable service at: " + loggedInPage.uri.to_s
+                puts "Successfully logged into Timtable service at: " + loggedInPage.uri.to_s + "\n"
 
                 return loggedInPage
             else
-                puts "An error has occurred trying to log in at: " + loggedInPage.uri.to_s
+                puts "An error has occurred trying to log in at: " + loggedInPage.uri.to_s + "\n"
             end
         end
     end

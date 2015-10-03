@@ -8,4 +8,6 @@ loginManager = LoginManager.new
 webPage = loginManager.beginNewSession
 
 parser = TimetableParser.new
-parser.getTimetableForCourse('DT228', '3')
+timetable = parser.getTimetableForCourse('DT228', '3')
+
+puts timetable.inspect

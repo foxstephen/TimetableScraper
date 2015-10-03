@@ -24,10 +24,16 @@ class TimetableParser
 
         pageLoader = PageLoader.new url
         timetable = pageLoader.loadPage
-        puts timetable.inspect
+
 
     end
 
+
+    # See below for the following format for URLs.
+    # https://www.dit.ie/timetables/PortalServ?reqtype=timetable&ttType=CLASS&sKey=201516|DT228|DT228/2|4-16
+    # https://www.dit.ie/timetabes/PortalServ?reqtype=timetable&ttType=CLASS&sKey=201516|DT228|DT228/3|4-16
+    # Format:  Academic year(201516), Course(DT228), Course/Year(DT228/2), Weeks(4-16)
+    #	?reqtype=timetable&ttType=CLASS&sKey=DATE|COURSE|COURSE/YEAR|SEMESTERS
 
 
     # Generates a URL for a given course and the year
@@ -36,7 +42,7 @@ class TimetableParser
         date = '201516'
         weeks = '4-16'
 
-        url = 'https://www.dit.ie/timetabes/PortalServ?reqtype=timetable&ttType=CLASS&sKey=' + date + '|' + courseCode + '|' + courseCode + '/' + year + '|' + weeks
+        url = 'https://www.dit.ie/timetables/PortalServ?reqtype=timetable&ttType=CLASS&sKey=' + date + '|' + courseCode + '|' + courseCode + '/' + year + '|' + weeks
 
         return url
     end
