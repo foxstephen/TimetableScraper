@@ -1,5 +1,3 @@
-require_relative 'sharedmechanize'
-
 
 # This class can parse a timetable from the website
 # into to be decided format.
@@ -11,15 +9,29 @@ class TimetableParser
     # Initializes a new instance with
     # that has the content of a timetable
     def initialize
-
-        @mechanizeInstance = SharedMechanize.instance
+        @rowForDay = {'r0' => 'Monday', 'r1' => 'Tuesday', 'r2' => 'Wednesday', 'r3' => 'Thursday', 'r4' => 'Friday', 'r5' => 'Saturday', 'r6' => 'Sunday'}
+        @rows = ['r0', 'r1', 'r2', 'r3', 'r4', 'r5', 'r6']
     end
 
 
     def parsePage(webPage)
-        puts webPage.search("div[style*='top:1px;']").text
-        #puts webPage.search("div[@id='c11285'][@style='position:absolute;top:1px;left:333px;width:65px;height:226px;overflow:hidden;background-color:transparent;z-index:10;border: 1px solid #000']").text
+        self.countDaysForTimetable(webPage)
+        #puts webPage.search("div[style*='top:1px;']").text.tr('-', '').squeeze("\n")
 
+    end
+
+    # Counts the number of days a timetable will be
+    # spread out over.
+    #
+    # Returns: The amount of days. [1-7] days.
+    def countDaysForTimetable(webPage)
+        supportedDays = []
+
+        @rows.each_with_index do |row, index|
+            if !webPage.search('#' + row).empty?
+                supportedDays << webPage.search('#' + row)
+            end
+        end
     end
 
 
