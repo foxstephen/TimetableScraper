@@ -15,7 +15,7 @@ class LoginManager
     # Returns: If successfully logged in returns the webPage.
     def beginNewSession
 
-        puts @sessionURL
+        puts "Attempting to login to: " + @sessionURL + '\n'
 
         pageLoader = PageLoader.new @sessionURL
         webPage = pageLoader.loadPage

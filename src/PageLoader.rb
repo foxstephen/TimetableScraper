@@ -2,8 +2,7 @@ require_relative 'sharedmechanize'
 
 class PageLoader
 
-    # Values which represent the web page of
-    # a scrape.
+    # Values which represent the web page of a scrape.
     #
     #   LOGIN_WEB_PAGE is the web page which requests any
     #                  user of the timetable system to login.

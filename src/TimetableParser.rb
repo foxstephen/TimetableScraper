@@ -1,4 +1,4 @@
-require_relative 'timetableparser'
+require_relative 'sharedmechanize'
 
 
 # This class can parse a timetable from the website
@@ -12,20 +12,24 @@ class TimetableParser
     end
 
 
-    def parsePageToOutput(timetableWebPage)
-        htmlParser = Nokogiri::HTML(timetableWebPage.body)
-        return htmlParser.css('.d0')
+    def parsePage(webPage)
+        # For days use : webPage.search("//div[@class='high']").text
+
+        puts webPage.search("//div[@id='c11285']").text.tr('-', '').squeeze("\n")
+        puts webPage.search("//div[@id='c80353']").text.tr('-', '').squeeze("\n")
+
     end
 
 
 
     def getTimetableForCourse(courseCode, year)
-        url = self.generateURLForCourse(courseCode, year)
 
-        pageLoader = PageLoader.new url
-        timetable = pageLoader.loadPage
+        generatedURL = self.generateURLForCourse(courseCode, year)
 
+        pageLoader = PageLoader.new generatedURL
+        timetableWebPage = pageLoader.loadPage
 
+        parsedPage = self.parsePage(timetableWebPage)
     end
 
 
