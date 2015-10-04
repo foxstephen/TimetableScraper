@@ -22,9 +22,12 @@ class TimetableParser
         for i in 0..numberOfDaysForTimetable
             rowPosition = @rowsPositions[@rows[i]].to_s
 
-            @timetable[@days[i]] = webPage.search("div[style*='top:" + rowPosition + "px;']").text.tr('-', '').squeeze("\n")
-            puts @days[i]
-            puts @timetable[@days[i]]
+            puts webPage.search("#r0 + div[style*='top:1px']").text
+
+            # end
+            # @timetable[@days[i]] = webPage.search("div[style*='top:" + rowPosition + "px;']").text.tr('-', '').squeeze("\n")
+            # puts @days[i]
+            # puts @timetable[@days[i]]
         end
 
 
@@ -76,7 +79,6 @@ class TimetableParser
         weeks = '4-16'
 
         url = 'https://www.dit.ie/timetables/PortalServ?reqtype=timetable&ttType=CLASS&sKey=' + date + '|' + courseCode + '|' + courseCode + '/' + year + '|' + weeks
-        puts url
         return url
     end
 
