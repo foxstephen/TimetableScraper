@@ -7,7 +7,7 @@ class Timetable
         @courseCode = courseCode
         @year = year
 
-        @timetableparser = TimetableParser.new
+        @timetable_parser = TimetableParser.new
     end
 
 
@@ -15,7 +15,7 @@ class Timetable
     # an instance was initialised with.
     #
     # Returns: A timetable for a course.
-    def getTimetable
-        return @timetableparser.getTimetableForCourse(@courseCode, @year)
+    def get_timetable
+        return @timetable_parser.get_timetable_for_course(@courseCode, @year)
     end
 end

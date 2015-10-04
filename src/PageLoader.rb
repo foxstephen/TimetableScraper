@@ -22,23 +22,21 @@ class PageLoader
                 ]
 
 
-
-
     # Initializes a new instance with a specified instance
     def initialize(url)
         @url = url
         # Create our mechanized instance
-        @mechanizeInstance = SharedMechanize.instance
+        @mechanize_instance = SharedMechanize.instance
     end
 
     # Loads the page with associated with the instance.
-    def loadPage
-        return @mechanizeInstance.get(@url)
+    def load_page
+        return @mechanize_instance.get(@url)
     end
 
     # Loads a web page with a given url.
-    def pageForURL(url)
-        return @mechanizeInstance.get(url)
+    def page_for_url(url)
+        return @mechanize_instance.get(url)
     end
 
 
@@ -47,13 +45,13 @@ class PageLoader
     # Param: The webpage to check.
     # Returns: A value CURRENT_PAGE which represents which
     #         page is currently held.
-    def self.currentPage(webPage)
-        if (webPage.uri.to_s == 'https://www.dit.ie/timetables/index.jsp')
+    def self.current_page(web_page)
+        if (web_page.uri.to_s == 'https://www.dit.ie/timetables/index.jsp')
             return WEB_PAGE_LOGIN
-        elsif (webPage.uri.to_s == 'https://www.dit.ie/timetables/PortalServ?reqtype=login')
+        elsif (web_page.uri.to_s == 'https://www.dit.ie/timetables/PortalServ?reqtype=login')
             return WEB_PAGE_LOGGED_IN
             puts 'Logged in'
-        elsif (webPage.title.to_s == 'Timetable for ')
+        elsif (web_page.title.to_s == 'Timetable for ')
             return WEB_PAGE_TIMETABLE
         else
             return WEB_PAGE_UNKNOWN

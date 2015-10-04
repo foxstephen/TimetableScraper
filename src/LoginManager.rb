@@ -4,7 +4,7 @@ require_relative 'pageloader'
 class LoginManager
 
     def initialize
-        @sessionURL = 'https://www.dit.ie/timetables/index.jsp'
+        @session_url = 'https://www.dit.ie/timetables/index.jsp'
         @username = 'students'
         @password = 'timetables'
     end
@@ -13,28 +13,26 @@ class LoginManager
     # Will attempt to login and begin a new session
     # on the DIT Timetables website.
     # Returns: If successfully logged in returns the webPage.
-    def beginNewSession
+    def begin_new_session
 
-        puts "Attempting to login to: " + @sessionURL + '\n'
+        puts "Attempting to login to: " + @session_url + '\n'
 
-        pageLoader = PageLoader.new @sessionURL
-        webPage = pageLoader.loadPage
+        page_loader = PageLoader.new @session_url
+        web_page = page_loader.load_page()
 
         # Check to see if redirected to login page.
-        if (PageLoader.currentPage(webPage) == PageLoader::WEB_PAGE_LOGIN)
+        if (PageLoader.current_page(web_page) == PageLoader::WEB_PAGE_LOGIN)
 
             # Login with username and password
-            loginForm = webPage.forms.first
-            loginForm['username'] = @username
-            loginForm['userpassword'] = @password
-            loggedInPage = loginForm.submit
+            login_form = web_page.forms.first
+            login_form['username'] = @username
+            login_form['userpassword'] = @password
+            logged_in_page = login_form.submit
 
-            if (PageLoader.currentPage(loggedInPage) == PageLoader::WEB_PAGE_LOGGED_IN)
-                puts "Successfully logged into Timtable service at: " + loggedInPage.uri.to_s + "\n"
+            if (PageLoader.current_page(logged_in_page) == PageLoader::WEB_PAGE_LOGGED_IN)
+                puts "Successfully logged into Timtable service at: " + logged_in_page.uri.to_s + "\n"
 
-                return loggedInPage
-            else
-                puts "An error has occurred trying to log in at: " + loggedInPage.uri.to_s + "\n"
+                return logged_in_page
             end
         end
     end

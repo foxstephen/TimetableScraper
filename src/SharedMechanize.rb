@@ -6,9 +6,9 @@ require 'mechanize'
 # a session after login.
 class SharedMechanize
 
-    @@mechanizeInstance = Mechanize.new
+    @@mechanize_instance = Mechanize.new
 
     def self.instance
-        return @@mechanizeInstance
+        return @@mechanize_instance
     end
 end

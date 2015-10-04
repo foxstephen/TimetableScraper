@@ -8,16 +8,16 @@ class TimetableParser
     # Initializes a new instance with
     # that has the content of a timetable
     def initialize
-        @sharedMechanize = SharedMechanize.instance
+        @shared_mechanize = SharedMechanize.instance
         @days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
 
         @timetable = {} # A hash map with a key(day) and a value(string) representing each day of a timetable
     end
 
 
-    def parsePage(webPage)
+    def parse_page(web_page)
 
-        puts webPage.search('*')
+        puts web_page.search('*')
 
     end
 
@@ -26,37 +26,38 @@ class TimetableParser
     # spread out over.
     #
     # Returns: The amount of days. [1-7] days.
-    def countDaysForTimetable(webPage)
-        supportedDays = []
+    def count_days_for_timetable(web_page)
+        supported_days = []
 
         @rows.each_with_index do |row, index|
-            if !webPage.search('#' + row).empty?
-                supportedDays << webPage.search('#' + row)
+            if !web_page.search('#' + row).empty?
+                supported_days << web_page.search('#' + row)
             end
         end
 
-        return supportedDays.count
+        return supported_days.count
     end
 
 
 
-    def getTimetableForCourse(courseCode, year)
-        generatedURL = self.generateURLForCourse(courseCode, year)
+    def get_timetable_for_course(course_code, year)
+        generated_url = self.generate_url_for_course(course_code, year)
 
-        pageLoader = PageLoader.new generatedURL
+        page_loader = PageLoader.new generated_url
 
         # The first page we're brought to for the timetable.
-        timetableWebPage = pageLoader.loadPage
+        timetable_web_page = page_loader.load_page
 
         # The showGrid button
-        showGridButton = timetableWebPage.forms.first.button_with(:value => 'View Grid')
+        show_grid_button = timetable_web_page.forms.first.button_with(:value => 'View Grid')
 
         # The form to which the showGrid button is attached.
-        form = timetableWebPage.forms.first
+        form = timetable_web_page.forms.first
 
         # Click the showGrid button
-        showGridPage = @sharedMechanize.submit(form, showGridButton)
-        parsedPage = self.parsePage(showGridPage)
+        show_grid_page = @shared_mechanize.submit(form, show_grid_button)
+
+        parsed_page = self.parse_page(show_grid_page)
 
     end
 
@@ -73,11 +74,11 @@ class TimetableParser
     # When represented as a actual URL it should look something like this.
     # https://www.dit.ie/timetables/PortalServ?reqtype=timetable&ttType=CLASS&sKey=201516|DT228|DT228/2|4-16
     #
-    def generateURLForCourse(courseCode, year)
+    def generate_url_for_course(course_code, year)
         date = '201516'
         weeks = '4-16'
 
-        url = 'https://www.dit.ie/timetables/PortalServ?reqtype=timetable&ttType=CLASS&sKey=' + date + '|' + courseCode + '|' + courseCode + '/' + year + '|' + weeks
+        url = 'https://www.dit.ie/timetables/PortalServ?reqtype=timetable&ttType=CLASS&sKey=' + date + '|' + course_code + '|' + course_code + '/' + year + '|' + weeks
 
         return url
     end
