@@ -15,6 +15,8 @@ class PageLoader
   #                      the following link: https://www.dit.ie/timetables/PortalServ?reqtype=timetable&ttType=CLASS&sKey=201516|DT228|DT228/2|4-16 parameters are set and correct. See Main.rb for parameters.
   #
   #
+  # For grid view: https://www.dit.ie/timetables/PortalServreqtype=timetable&undefined=undefined&action=getgrid&sKey=201516%7CDT228%7CDT228%2F3%7C4-16&sWeeks=&sType=class&sYear=&sFromDate=&sToDate=&sEventType=&sModOccur=&sSource=&instCode=-2&instName=&useBooking=null&contactkey=&isBooking=null&subTitle=
+  
   CURRENT_PAGE = [
     WEB_PAGE_LOGIN = '1',
     WEB_PAGE_LOGGED_IN = '2',

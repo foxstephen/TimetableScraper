@@ -39,6 +39,7 @@ class TimetableParser
 
     # The first page we're brought to for the timetable.
     timetable_web_page = page_loader.load_page
+    puts timetable_web_page.inspect
 
     # The showGrid button
     show_grid_button = timetable_web_page.forms.first.button_with(:value => 'View Grid')
@@ -70,7 +71,7 @@ class TimetableParser
 
     url = 'https://www.dit.ie/timetables/PortalServ?reqtype=timetable&ttType=CLASS&sKey=' + date + '|' + course_code + '|' + course_code + '/' + year + '|' + weeks
 
-    return url
+    url
   end
 
 end
