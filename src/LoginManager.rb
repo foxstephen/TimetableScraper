@@ -32,7 +32,7 @@ class LoginManager
       if (PageLoader.current_page(logged_in_page) == PageLoader::WEB_PAGE_LOGGED_IN)
         puts "Successfully logged into Timtable service at: " + logged_in_page.uri.to_s + "\n"
 
-        return logged_in_page
+        logged_in_page
       end
     end
   end

@@ -2,7 +2,7 @@ require_relative 'timetableparser'
 
 
 class Timetable
-
+  
   def initialize(courseCode, year)
     @courseCode = courseCode
     @year = year
@@ -14,6 +14,6 @@ class Timetable
   #
   # Returns: A timetable for a course.
   def get_timetable
-    return @timetable_parser.get_timetable_for_course(@courseCode, @year)
+    @timetable_parser.get_timetable_for_course(@courseCode, @year)
   end
 end

@@ -33,12 +33,12 @@ class PageLoader
 
   # Loads the page with associated with the instance.
   def load_page
-    return @mechanize_instance.get(@url)
+    @mechanize_instance.get(@url)
   end
 
   # Loads a web page with a given url.
   def page_for_url(url)
-    return @mechanize_instance.get(url)
+    @mechanize_instance.get(url)
   end
 
 
@@ -49,13 +49,13 @@ class PageLoader
   #         page is currently held.
   def self.current_page(web_page)
     if (web_page.uri.to_s == 'https://www.dit.ie/timetables/index.jsp')
-      return WEB_PAGE_LOGIN
-    elsif (web_page.uri.to_s == 'https://www.dit.ie/timetables/PortalServ?reqtype=login')
-      return WEB_PAGE_LOGGED_IN
+      WEB_PAGE_LOGIN
+    elsif (web_page.uri.to_s == 'https://www.dit.ie/timetables/PortalServ?reqtype=login')  
+      WEB_PAGE_LOGGED_IN
     elsif (web_page.title.to_s == 'Timetable for ')
-      return WEB_PAGE_TIMETABLE
+      WEB_PAGE_TIMETABLE
     else
-      return WEB_PAGE_UNKNOWN
+      WEB_PAGE_UNKNOWN
     end
   end
 
